@@ -23,17 +23,24 @@ data "aws_ami" "latest_version" {
     values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
   }
 }
-output "latest_version_linux" {
-  value = data.aws_ami.latest_version.id
-}
 resource "aws_instance" "server" {
+ # count                  = "1" # Number of servers
   key_name               = "Ec2"
   ami                    = data.aws_ami.latest_version.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.server.id]
   tags = {
-    Name  = "Server from Mobi"
+    Name  = "Server from Mobidev"
     Owner = "Eugen Tkachenko"
+  }
+}
+resource "aws_eip" "static_ip" {
+  instance = aws_instance.server.public_ip
+  vpc = true
+  tags = {
+    Name = "IP address"
+    owner = "Mobidev"
+    region = var.region
   }
 }
 resource "aws_key_pair" "Ec2" {

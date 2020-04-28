@@ -7,3 +7,4 @@ variable "instance_type" {
   description = "Please Enter Instance Type"
   default     = "t2.micro"
 }
+
