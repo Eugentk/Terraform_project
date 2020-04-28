@@ -6,7 +6,14 @@
 provider "aws" {
   region = var.region #
 }
-
+# Repository when save state file
+terraform {
+  backend "s3" {
+    bucket = "terraform-state-tk"
+    key = "global/s3/terraform.tfstate"
+    region = "eu-central-1"
+}
+}
 data "aws_availability_zones" "available" {}
 data "aws_ami" "latest_version" {
   owners      = ["099720109477"]
@@ -25,7 +32,7 @@ resource "aws_instance" "server" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.server.id]
   tags = {
-    Name  = "Server from Mobidev"
+    Name  = "Server from Mobi"
     Owner = "Eugen Tkachenko"
   }
 }
