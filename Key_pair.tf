@@ -1,15 +1,12 @@
 #------------------------------------------------
 # Terraform by Mobidev
 #
-# Output.tf file
+# Key_pair.tf file
 #
 # Made by y.tkachenko@mobidev.biz
 #-------------------------------------------------
 
-output "latest_version_linux" {
-  value = data.aws_ami.latest_version.id
-}
-
-output "Elastic_IP" {
-  value = aws_eip.static_ip.public_ip
+resource "aws_key_pair" "Ec2" {
+  key_name   = "Ec2"
+  public_key = file(var.public_key_path)
 }

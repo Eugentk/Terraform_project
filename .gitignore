@@ -4,3 +4,4 @@
 /terraform.tfstate.backup
 /S3_terraform_state/terraform.tfstate
 /S3_terraform_state/terraform.tfstate.backup
+/public_key.txt
