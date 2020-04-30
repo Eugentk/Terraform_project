@@ -5,3 +5,8 @@
 /S3_terraform_state/terraform.tfstate
 /S3_terraform_state/terraform.tfstate.backup
 public_key.txt
+
+/EC2_Docker/.terraform/
+/EC2_Docker/public_key.txt/
+/EC2_WebServer/.terraform/
+/EC2_WebServer/public_key.txt/
