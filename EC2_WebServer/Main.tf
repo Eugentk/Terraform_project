@@ -1,7 +1,7 @@
 #------------------------------------------------
 # Terraform by Mobidev
 #
-# Main.tf file
+# Main.tf file Web Server
 #
 # Made by y.tkachenko@mobidev.biz
 #-------------------------------------------------
