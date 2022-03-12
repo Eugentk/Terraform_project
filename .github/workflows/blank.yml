@@ -1,0 +1,29 @@
+name: Deploy to public server
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy 
+        id: deploy_with_scp
+        uses: noobly314/deploy-with-scp@v1
+        with:
+          src: ./EC2_WebServer
+          dest: /home/ubuntu/
+          username: ubuntu
+          server-ip: ${{ secrets.PRIVATE_HOST }}
+          ssh-key: ${{ secrets.PRIVATE_KEY }}
+          proxy-username: ubuntu
+          proxy-server-ip: ${{ secrets.PROXY_HOST }}
+          proxy-ssh-key: ${{ secrets.PRIVATE_KEY }}
