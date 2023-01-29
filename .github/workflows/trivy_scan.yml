@@ -1,0 +1,25 @@
+name: "Code Scanning"
+
+on: workflow_dispatch
+
+jobs:
+  Trivy-Scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Trivy vulnerability scanner in fs mode
+        uses: anandg112/trivy-action@feat/add-skip-dirs-option
+        with:
+          scan-type: 'config'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL, HIGH'
+
+      - name: DEBUG Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'debug-trivy-results.sarif'
